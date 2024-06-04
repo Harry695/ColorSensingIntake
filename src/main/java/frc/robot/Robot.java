@@ -26,7 +26,6 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   private ColorSensorV3 colorSensor = new ColorSensorV3(Port.kOnboard);
-  public Color gamepieceColor = Color.kBlack;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -91,7 +90,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    gamepieceColor = colorSensor.getColor();
+    Color gamepieceColor = colorSensor.getColor();
     IntakeSubsystem intake = Subsystems.intake;
 
     if (!gamepieceColor.equals(Color.kRed)) { // Stops and retracts the intake if we see a non-red game piece and not already retracted
