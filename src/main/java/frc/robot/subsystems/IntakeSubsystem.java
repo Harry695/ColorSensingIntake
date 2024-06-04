@@ -26,21 +26,35 @@ public class IntakeSubsystem extends SubsystemBase {
     motor.setIdleMode(IdleMode.kCoast);
   }
 
+  /**
+   * Extend the piston and run the intake inward.
+   */
   public void extendAndIntake() {
     solenoid.set(Value.kForward);
     motor.set(INTAKE_POWER);
   }
 
+  /**
+   * Extend the piston and run the intake outward.
+   */
   public void extendAndOuttake() {
     solenoid.set(Value.kForward);
     motor.set(EJECT_POWER);
   }
 
+  /**
+   * Retract the piston and stop the intake motor.
+   */
   public void retractAndStopMotor() {
     solenoid.set(Value.kReverse);
     motor.set(0);
   }
 
+  /**
+   * Returns whether the intake piston is extended.
+   * 
+   * @return True if the intake piston is extended and false otherwise.
+   */
   public boolean isExtended() {
     return solenoid.get().equals(Value.kForward);
   }
