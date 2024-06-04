@@ -94,15 +94,13 @@ public class Robot extends TimedRobot {
     gamepieceColor = colorSensor.getColor();
     IntakeSubsystem intake = Subsystems.intake;
 
-    // Stops and retracts the intake if we see a blue game piece and not already retracted
-    if (gamepieceColor.equals(Color.kBlue) && intake.isExtended()) {
-      Subsystems.intake.retractAndStopMotor();
-    }
-
-    // Extend and run the intake if we start seeing a red game piece and not already extended
-    if (gamepieceColor.equals(Color.kRed) && !intake.isExtended()) {
-      Subsystems.intake.extendAndIntake();
-    }
+    if (!gamepieceColor.equals(Color.kRed)) { // Stops and retracts the intake if we see a non-red game piece and not already retracted
+      if (intake.isExtended()) {
+        intake.retractAndStopMotor();
+      }
+    } else if (!intake.isExtended()) { // If game piece is red and we are not already extended, extend and run the intake
+      intake.extendAndIntake();
+    } // In any other case, no change in the state of the intake is necessary.
   }
 
   @Override
